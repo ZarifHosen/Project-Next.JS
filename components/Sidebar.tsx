@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Calendar, User, Settings } from "react-feather"; // Import icons
 import Card from "./Card";
 import SidebarLink from "./SidebarLink";
-
 const links = [
   { label: "Home", icon: Grid, link: "/home" },
   {

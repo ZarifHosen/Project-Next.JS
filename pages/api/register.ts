@@ -1,6 +1,6 @@
-import { createJWT, hashPassword } from "libs/auth";
 import { NextApiRequest, NextApiResponse } from "next";
-import { db } from "libs/db";
+import { db } from "../../libs/db";
+import { createJWT, hashPassword } from "../../libs/auth";
 import { serialize } from "cookie";
 
 export default async function register(
@@ -16,8 +16,8 @@ export default async function register(
         lastName: req.body.lastName,
       },
     });
-    const jwt = await createJWT(user);
 
+    const jwt = await createJWT(user);
     res.setHeader(
       "Set-Cookie",
       serialize(process.env.COOKIE_NAME, jwt, {
@@ -26,6 +26,10 @@ export default async function register(
         maxAge: 60 * 60 * 24 * 7,
       })
     );
+    res.status(201);
+    res.json({});
+  } else {
+    res.status(402);
+    res.json({});
   }
-  res.status(201).end();
 }
