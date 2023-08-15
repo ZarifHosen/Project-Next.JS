@@ -1,5 +1,5 @@
 import { serialize } from "cookie";
-import { comparePassword, createJWT } from "libs/auth";
+import { comparePasswords, createJWT } from "libs/auth";
 import { db } from "libs/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -14,7 +14,7 @@ export default async function signin(
       },
     });
 
-    const isUser = await comparePassword(req.body.password, user?.password);
+    const isUser = await comparePasswords(req.body.password, user?.password);
 
     if (isUser) {
       const jwt = await createJWT(user);

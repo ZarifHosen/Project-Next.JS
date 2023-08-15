@@ -29,6 +29,7 @@ export const validateJWT = async (jwt) => {
 };
 
 export const getUserFromCookie = async (cookies) => {
+  console.log(cookies, "cookies");
   const jwt = cookies.get(process.env.COOKIE_NAME);
 
   const { id } = await validateJWT(jwt.value);
